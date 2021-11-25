@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Goods</title>
+    <link href="/css/bootstrap.css" type="text/css" rel="stylesheet" />
+    <script src="/js/jquery-3.1.0.min.js" ></script>
+    <script src="/js/bootstrap.min.js" ></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Список товарів в магазинах</h1>
+        <a href="/createGood"><button type="button" class="btn-primary" >Додати товар</button></a>
+        <table class="table table-striped table-fixed">
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Remnant</th>
+            </thead>
+            <tbody>
+                <tr th:each="good : ${goodsList}">
+                    <td th:text="${good.goodsId}"></td>
+                    <td th:text="${good.name}"></td>
+                    <td th:text="${good.description}"></td>
+                    <td th:text="${good.remnant}"></td>
+                    <td>
+                        <a th:href="@{/delete/{id}(id=${good.getGoodsId()})}">
+                            <button type="button" class="btn-primary">Видалити</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/updateGood/{id}(id=${good.getGoodsId()})}" th:object="${good}">
+<!--                        <a th:href="@{/updateGood}" th:object="${good}">-->
+                        <button type="button" class="btn-primary">Редагувати</button>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
